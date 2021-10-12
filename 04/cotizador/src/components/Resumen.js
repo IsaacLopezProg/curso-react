@@ -1,6 +1,7 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import styled from '@emotion/styled'
 import { primerMayuscula } from '../helper';
+
 
 const ContenedorResumen = styled.div`
 	padding: 1rem;
@@ -12,9 +13,15 @@ const ContenedorResumen = styled.div`
 `
 
 
+
+
 const Resumen = ({datos}) =>{
-	
+
+
 	const {marca, year, plan} = datos;
+
+	if(marca === '' || year === '' || plan === '' ) return null;
+	
 	
 	return (
 		<ContenedorResumen>
@@ -22,7 +29,7 @@ const Resumen = ({datos}) =>{
 			<ul>
 				<li>Marca: {primerMayuscula(marca)} </li>
 				<li>Plan: {primerMayuscula(plan)}</li>
-				<li>Ano del auto: {year}</li>
+				<li>Año del auto: {year}</li>
 			</ul>
 		</ContenedorResumen>
 		);
