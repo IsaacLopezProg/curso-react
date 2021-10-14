@@ -63,7 +63,7 @@ function App() {
       
 
         const climaToken = '5ec9319031dac6e4d54b269d01d579a7';
-        const url = `http://api.openweathermap.org/data/2.5/weather?lat=${latitud}&lon=${longitud}&appid=${climaToken}&units=metric&lang=es`;
+        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitud}&lon=${longitud}&appid=${climaToken}&units=metric&lang=es`;
         const respuestaclima = await fetch(url);
         const resclima = await respuestaclima.json();
         setClima({
