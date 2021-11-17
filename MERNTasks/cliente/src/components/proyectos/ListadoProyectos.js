@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from 'react'
 import Proyecto from './Proyecto';
-import proyectoContext from '../../context/proyectoContext';
+import proyectoContext from '../../context/proyectos/proyectoContext';
 
 
 const ListadoProyectos = () => {
@@ -13,7 +13,7 @@ const ListadoProyectos = () => {
             obtenerProyectos();
         },[])
     
-        if(proyectos.length === 0) return null;
+        if(proyectos.length === 0) return <p>No hay proyectos, comienza creando uno</p>;
 
 
     return ( 

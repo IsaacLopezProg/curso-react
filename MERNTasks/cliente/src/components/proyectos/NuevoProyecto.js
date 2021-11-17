@@ -1,11 +1,11 @@
 import React, {Fragment, useState, useContext} from 'react';
-import proyectoContext from '../../context/proyectoContext';
+import proyectoContext from '../../context/proyectos/proyectoContext';
 
 const NuevoProyectos = () => {
 
     // obtener el state del formulario
     const proyectosContext = useContext(proyectoContext);
-    const {formulario, mostrarFormulario} = proyectosContext;
+    const {formulario,errorformulario, mostrarFormulario, agrergarProyecto,mostrarError} = proyectosContext;
 
 
 
@@ -30,6 +30,21 @@ const NuevoProyectos = () => {
     // cuando el usuario envia un proyecto
     const onSubmitProyecto = e => {
         e.preventDefault();
+
+
+        // validar proyecto
+
+        if(nombre === ''){
+            mostrarError();
+            return;
+        }
+        // enviar al state
+        agrergarProyecto(proyecto);
+
+        // reiniciar form
+        guardarProyecto({
+            nombre:''
+        })
     }
 
     const onClickFormulario = () => {
@@ -76,6 +91,8 @@ const NuevoProyectos = () => {
                         :
                         null
             }
+            {errorformulario ? <p className="mensaje error"> El nombre del proyecto es obligatorio </p> 
+            : null}
         </Fragment>
 
      );
