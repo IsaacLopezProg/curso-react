@@ -19,6 +19,7 @@ export default(state, action) => {
             return{
                 ...state,
                 proyectos: action.payload
+
             }
         case AGREGAR_PROYECTO:
             return{

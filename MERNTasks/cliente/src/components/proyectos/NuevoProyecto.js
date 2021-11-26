@@ -41,6 +41,9 @@ const NuevoProyectos = () => {
         // enviar al state
         agrergarProyecto(proyecto);
 
+        // obtener las tareas filtradas
+        
+
         // reiniciar form
         guardarProyecto({
             nombre:''
