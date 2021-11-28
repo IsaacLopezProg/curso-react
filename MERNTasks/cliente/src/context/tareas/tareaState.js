@@ -8,7 +8,9 @@ import {
     VALIDAR_TAREA,
     ELIMINAR_TAREA,
     ESTADO_TAREA,
-    TAREA_ACTUAL
+    TAREA_ACTUAL,
+    ACTUALIZAR_TAREA,
+    LIMPIAR_TAREA
 } from '../../types';
 
 const TareaState = props => {
@@ -82,6 +84,21 @@ const TareaState = props => {
         })
     }
 
+    // edita o modifica una tarea
+    const actualizarTarea = tarea => {
+        dispatch({
+            type:ACTUALIZAR_TAREA,
+            payload:tarea
+        })
+    }
+
+    //LIMPIAR LA TAREA SELECCIONADA 
+    const limpiarTarea =  () => {
+        dispatch({
+            type:LIMPIAR_TAREA
+        })
+    }
+
     return (
         <tareaContext.Provider
             value={{
@@ -95,6 +112,8 @@ const TareaState = props => {
                 eliminarTarea,
                 cambiarEstadoTarea,
                 guardarTareaActual,
+                actualizarTarea,
+                limpiarTarea
                 
             }}
         >
