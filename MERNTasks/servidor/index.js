@@ -23,6 +23,10 @@ app.use(express.json({ extended:true}));
 
 // importar rutas
 app.use('/api/usuarios', require('./routes/usuarios'));
+//importacion de la ruta de auth
+app.use('/api/auth', require('./routes/auth'));
+//importacion de la ruta de proyectos
+app.use('/api/proyecto', require('./routes/proyecto'));
 
 // arrancar la app
 app.listen(PORT, () =>{
