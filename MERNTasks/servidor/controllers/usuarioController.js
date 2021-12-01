@@ -12,22 +12,16 @@ const {validationResult} = require('express-validator');
 //  para acceder como usuarios registrados a nuestro usuario
 // y para relacionarnos con la base de datos
 const jwt = require('jsonwebtoken');
-// const {validationResult} = require('express-validator');
 
+// llamado a mi helper para la validacion
 const {confirm} = require('../helpers/validacionCheck');
 
 exports.crearUsuario = async (req, res) =>{
 
-
-    confirm(req);
-    //realizamos la validacion del express-validator aqui
-    //agregandole el request recibido
-    // const errores = validationResult(req); 
-    // if(!errores.isEmpty()){
-    //     //es errores array por que el check de errores es un arreglo
-    //     return res.status(400).json({errores:errores.array()});
-    // }
-
+    // un helper que cree para no repetir tanto mi codigo
+    // en todos los controller
+    confirm(req,res);
+   
     // extrayendo los valores del request
     const {email, password} = req.body;
     

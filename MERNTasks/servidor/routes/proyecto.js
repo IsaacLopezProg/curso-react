@@ -19,10 +19,27 @@ router.post('/',
 );
 
 //utilizando el tag GET
+// obtener todos los proyectos
 router.get('/',
     auth,//colocamos el middleware primero para que lo lea
         //primero antes de pasar al las demas funciones
-    proyectoController.crearProyecto
+    proyectoController.obtenerProyectos
 );
+
+// actualizar proyecto
+router.put('/:id',
+        auth,
+        [
+            check('nombre','El nombre es obligatorio')
+        ],
+        proyectoController.actualizarProyecto
+)
+
+// eliminar un proyecto
+router.delete('/:id',
+        auth,
+        proyectoController.eliminarProyecto
+)
+
 
 module.exports = router;

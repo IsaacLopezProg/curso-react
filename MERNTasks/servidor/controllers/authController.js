@@ -5,10 +5,8 @@ const Usuario = require('../models/Usuario');
 // esta libreria es para hashear las contrasenas de los usuarios
 const bcryptjs = require('bcryptjs');
 
-// esta libreria es para revisar los resultados de la validacion
-// hecha en el routing de Usuario de la libreria de 
-// express-validator llamada validationResulta, devuelve los resultdos
-const {validationResult} = require('express-validator');
+// llamado a mi helper para la validacion
+const {confirm} = require('../helpers/validacionCheck');
 
 // Esta libreria es para seguridad, con ella creamos un token
 //  para acceder como usuarios registrados a nuestro usuario
@@ -19,13 +17,9 @@ const jwt = require('jsonwebtoken');
 exports.autenticarUsuario = async (req, res) => {
 
     // VALIDACION DE ERRORES
-    //realizamos la validacion del express-validator aqui
-    //agregandole el request recibido
-    const errores = validationResult(req); 
-    if(!errores.isEmpty()){
-        //es errores array por que el check de errores es un arreglo
-        return res.status(400).json({errores:errores.array()});
-    }
+    // un helper que cree para no repetir tanto mi codigo
+    // en todos los controller
+    confirm(req,res);
 
     //extraemos los valores de email y pass para facilitar su uso
     const {email, password} = req.body; //los valores vienen del request y su body.
