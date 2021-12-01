@@ -55,7 +55,7 @@ exports.autenticarUsuario = async (req, res) => {
          jwt.sign(payload, process.env.SECRETO, { // importante el secreto
             // es lo que lee JWT para autenticar
             // que es la misma persona o maquina
-        expiresIn: 3600 // expira 1 hora el token creado
+        expiresIn: 7400 // expira 1 hora el token creado
         }, (error, token) => {
         if(error) throw error;
 

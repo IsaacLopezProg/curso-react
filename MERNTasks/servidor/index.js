@@ -27,6 +27,8 @@ app.use('/api/usuarios', require('./routes/usuarios'));
 app.use('/api/auth', require('./routes/auth'));
 //importacion de la ruta de proyectos
 app.use('/api/proyecto', require('./routes/proyecto'));
+//importacion de la ruta de tareas
+app.use('/api/tareas', require('./routes/tareas'));
 
 // arrancar la app
 app.listen(PORT, () =>{
