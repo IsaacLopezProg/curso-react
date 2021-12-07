@@ -25,7 +25,7 @@ const Proyecto = ({proyecto}) => {
             <button
                 type="butto"
                 className="btn btn-blank"
-                onClick={()=>seleccionarProyecto(proyecto.id)}
+                onClick={()=>seleccionarProyecto(proyecto._id)}
             >
                 {proyecto.nombre}
             </button>

@@ -2,14 +2,18 @@ const express = require('express');
 
 const conectarDB = require('./config/db');
 
+//libreria para seguridad del endpoint
+const cors = require('cors');
+
 const app = express();
+
 
 // conectar a la base de datos
 conectarDB();
 
+// habilitar cors
+app.use(cors());
 
-// puerto de la app
-const PORT = process.env.PORT || 4000;
 
 // definir la pagina princial
 // app.get('/', (req, res) =>{
@@ -20,6 +24,9 @@ const PORT = process.env.PORT || 4000;
 //se usa para utilizar los mensajes json a la consola
 app.use(express.json({ extended:true}));
 
+
+// puerto de la app
+const PORT = process.env.PORT || 4000;
 
 // importar rutas
 app.use('/api/usuarios', require('./routes/usuarios'));

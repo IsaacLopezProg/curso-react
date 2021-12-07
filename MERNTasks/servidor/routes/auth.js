@@ -15,18 +15,31 @@ const authController = require('../controllers/authController');
 //validar)
 const {check} = require('express-validator');
 
+//importamos el middleawre que vamos autilizar
+const auth = require('../middleware/auth')
+
 
 // accede a su usuario
 // api/auth
 
 router.post('/', 
 //validamos esos campos con una funcion de express-validator llamada check
-    [
-        check('email','Agrega un email valido').isEmail(),
-        check('password','El password debe de ser minimo de 6 caracteres').isLength({min:6})
-    ],
+    // [
+    //     check('email','Agrega un email valido').isEmail(),
+    //     check('password','El password debe de ser minimo de 6 caracteres').isLength({min:6})
+    // ],
 // al utilizar un controlador podemos utilizar las funciones que querramos
 // dentro del controlador y mandarlas a llamar desde aqui, el routing de auth
     authController.autenticarUsuario //llamamos la funcion autenticarUsuario
 );
+
+//obtiene el usuario registrado
+// api/auth
+
+router.get('/',
+    auth,
+    authController.usuarioAutenticado
+
+)
+
 module.exports = router;
