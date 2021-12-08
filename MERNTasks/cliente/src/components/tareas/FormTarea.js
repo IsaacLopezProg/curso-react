@@ -58,8 +58,12 @@ const FormTarea = () => {
         if(tareaseleccionada === null){
     
             // agregar la nueva tarea al state de tareas 
-            tarea.proyectoId = proyectoActual.id;
-            tarea.estado = false;
+            //se cambia el nombre de proyectId a de proyecto
+            // por que en el api el nombre es proyecto
+            // y se elimina el tarea.estado = false, por que ya en el
+            // modelo de tarea en la base de datos de la api, esta definido
+            // como false el estado
+            tarea.proyecto = proyectoActual._id;
             agregarTarea(tarea);
 
         } else {
