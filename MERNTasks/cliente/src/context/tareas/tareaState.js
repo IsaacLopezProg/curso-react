@@ -42,10 +42,10 @@ const TareaState = props => {
 
     // agregar una tarea al proyecto seleccionado
     const agregarTarea = async tarea => {
-        console.log(tarea);
+        // console.log(tarea);
         try {
-            const resultado = await clienteAxios.post('/api/tareas',tarea);
-            console.log(resultado);
+            await clienteAxios.post('/api/tareas',tarea);
+            // console.log(resultado);
 
             dispatch({
                 type: AGREGAR_TAREA,
@@ -65,8 +65,10 @@ const TareaState = props => {
 
     // Eliminar tarea por id
     const eliminarTarea = async (id,proyecto) =>{
-        console.log(id,proyecto);
+        // console.log(id);
         await clienteAxios.delete(`api/tareas/${id}`,{params:{proyecto}});
+        // await clienteAxios.delete(`api/tareas/${id}`,proyecto);
+        // console.log(proyecto);
         try {
             dispatch({
                 type: ELIMINAR_TAREA,

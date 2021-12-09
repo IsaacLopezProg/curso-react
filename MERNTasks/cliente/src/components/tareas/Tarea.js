@@ -18,7 +18,7 @@ const Tarea = ({tarea}) => {
     const [ proyectoActual ] = proyecto;
 
     const tareaEliminar = id => {
-        console.log(id);
+        // console.log(id);
         eliminarTarea(id, proyectoActual._id);
         // es necesario pasarle el proyecto
         obtenerTareas(proyectoActual.id);

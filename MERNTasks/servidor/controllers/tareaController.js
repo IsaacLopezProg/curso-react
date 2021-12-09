@@ -114,9 +114,12 @@ exports.eliminarTareas = async (req, res) => {
         // extraer y validar el proyecto, en el req viene el proyecto
         
         const {proyecto} = req.query;
+        // const {proyecto} = req.body;
+        // console.log(proyecto);
          
         // valida el id de la tarea
         let tarea = await Tarea.findById(req.params.id);
+        // console.log(tarea);
         
         if(!tarea) {
             return res.status(404).json({msg:'la tarea no existe'});
@@ -131,7 +134,8 @@ exports.eliminarTareas = async (req, res) => {
         }
 
         //eliminar tarea
-        await Proyecto.findOneAndRemove({ _id:req.params.id});
+        // console.log(tarea._id.toString(), req.params.id);
+        await Tarea.findOneAndRemove({ _id:req.params.id});
         res.json({msg:"tarea eliminada"})
         
     } catch (error) {
