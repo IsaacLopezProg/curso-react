@@ -1,7 +1,7 @@
 import React, {Fragment, useContext} from 'react';
 
 import proyectoContext from '../../context/proyectos/proyectoContext';
-import tareaContext from '../../context/tareas/tareaContext';
+import TareaContext from '../../context/tareas/tareaContext';
 
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
@@ -14,7 +14,7 @@ const ListadoTareas = () => {
         const {proyecto, eliminarProyecto} = proyectosContext;
 
         // obtener el state de tareas
-        const tareasContext = useContext(tareaContext);
+        const tareasContext = useContext(TareaContext);
         const {tareasproyecto} = tareasContext;
 
 

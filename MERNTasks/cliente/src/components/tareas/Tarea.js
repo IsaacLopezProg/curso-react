@@ -12,13 +12,15 @@ const Tarea = ({tarea}) => {
 
     // obtener el state de tareas
     const tareasContext = useContext(tareaContext);
-    const {eliminarTarea, obtenerTareas, cambiarEstadoTarea, guardarTareaActual} = tareasContext;
+    const {eliminarTarea, obtenerTareas, actualizarTarea, guardarTareaActual} = tareasContext;
 
     // destructurando el proyecto
     const [ proyectoActual ] = proyecto;
 
     const tareaEliminar = id => {
-        eliminarTarea(id);
+        console.log(id);
+        eliminarTarea(id, proyectoActual._id);
+        // es necesario pasarle el proyecto
         obtenerTareas(proyectoActual.id);
     }
 
@@ -29,7 +31,7 @@ const Tarea = ({tarea}) => {
         } else{
             tarea.estado = true
         }
-        cambiarEstadoTarea(tarea);
+        actualizarTarea(tarea);
 
     }
 
@@ -70,7 +72,7 @@ const Tarea = ({tarea}) => {
         </div>
         <div className="acciones">
             <button onClick={() => seleccionarTarea(tarea)}  type="button" className="btn btn-primario">Editar</button>
-            <button onClick={()=>tareaEliminar(tarea.id)} type="button" className="btn btn-secundario">Elimiar</button>
+            <button onClick={()=>tareaEliminar(tarea._id)} type="button" className="btn btn-secundario">Elimiar</button>
         </div>
 
     </li>
