@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import {useNavigate} from 'react-router-dom'; 
 
 // Actions de Redux
 import { crearNuevoProductoAction } from '../actions/productoActions';
+import {mostrarAlerta, ocultarAlertaAction} from '../actions/alertaActions';
 
-const NuevoProductos = ({history}) => {
+const NuevoProductos = () => {
 
      // state del componente
      const [nombre, guardarNombre] = useState('');
@@ -13,6 +15,7 @@ const NuevoProductos = ({history}) => {
 
     // utilizar use dispatch y te crea una función
     const dispatch = useDispatch();
+    const navigate = useNavigate(); // activando navigate para rediccion
 
 
     // mandar llamar el action de productoAction
@@ -22,8 +25,11 @@ const NuevoProductos = ({history}) => {
     // llamando al state del store
     // const store = useSelector(state => state);
     // console.log(store);
-    const cargando = useSelector(state => state.productos.cargando);
+    // const cargando = useSelector(state => state.productos.cargando);
     const error = useSelector(state => state.productos.error);
+
+    // alerta del state de alerta
+    const alerta = useSelector(state => state.alerta.alerta);
 
 
 
@@ -33,23 +39,25 @@ const NuevoProductos = ({history}) => {
 
         // validar formulario
         if(nombre.trim() === '' || precio <= 0) {
+            
+            const alerta = {
+                msg:'Todos los campos son obligatorios',
+                class:'alert alert-danger text-center text-uppercase p3',
+            }
+
+            dispatch(mostrarAlerta(alerta));
             return;
         }
 
         // si no hay errores
-
+        dispatch(ocultarAlertaAction());
         // crear el nuevo producto
         agregarProducto({
             nombre,
             precio
         });
 
-        // const navigate = useNavigate();
-        // navigate('/home');
-
-        // TODO: pedniente
-        // redireccionar
-        // history.push('/');
+        navigate('/'); // redireccionado
     }
 
     return ( 
@@ -60,6 +68,11 @@ const NuevoProductos = ({history}) => {
                         <h2 className="text-center mb-4 font-weight-bold">
                             Agregar Nuevo Producto
                         </h2>
+                        {alerta? 
+                        <p className={alerta.class}>{alerta.msg}</p>
+                        :
+                        null
+                        }
 
                         <form onSubmit={submitNuevoProducto}>
                             <div className="form-group">

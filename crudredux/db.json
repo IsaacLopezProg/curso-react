@@ -3,12 +3,12 @@
     {
       "id": 1,
       "nombre": "Jugo de Zanahoria",
-      "precio": "31111"
+      "precio": "200"
     },
     {
       "id": 2,
       "nombre": "Jugo de Naranja",
-      "precio": "1"
+      "precio": "100"
     },
     {
       "nombre": "Jugo de Naranja",
@@ -99,6 +99,21 @@
       "nombre": "jugito de pera",
       "precio": 20,
       "id": 20
+    },
+    {
+      "nombre": "Jugo de Remolacha",
+      "precio": 50,
+      "id": 21
+    },
+    {
+      "nombre": "martini",
+      "precio": 10000,
+      "id": 22
+    },
+    {
+      "nombre": "",
+      "precio": 0,
+      "id": 23
     }
   ]
 }

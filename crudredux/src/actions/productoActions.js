@@ -4,15 +4,21 @@ import {
     AGREGAR_PRODUCTO_ERROR,
     COMENZAR_DESCARGA_PRODUCTOS,
     DESCARGA_PRODUCTOS_EXITO,
-    DESCARGA_PRODUCTOS_ERROR
+    DESCARGA_PRODUCTOS_ERROR,
+    OBTENER_PRODUCTO_ELIMINAR,
+    PRODUCTO_ELIMINAR_EXITOSO,
+    PRODUCTO_ELIMINAR_ERROR,
+    OBTENER_PRODUCTO_EDITAR,
+    COMENZAR_EDICION_PRODUCTOS,
+    PRODUCTO_EDITADO_EXITOSO,
+    PRODUCTO_EDITADO_ERROR
 } from '../types'; 
 
 import clienteAxios from '../config/axios';
 // lib para alerta
 import Swal from 'sweetalert2';
-import axios from 'axios';
 
-// crear nuevos productos
+// CREAR NUEVOS PRODUCTOS
 
 
 export function crearNuevoProductoAction(producto) {
@@ -68,7 +74,7 @@ const agregarProductoError = estado => ({
 })
 
 
-// Funciona que descarga los productos de la DB
+// FUNCIONA QUE DESCARGA LOS PRODUCTOS DE LA DB
 
 export function obtenerProductosAction(){
     return async (dispatch) => {
@@ -100,6 +106,85 @@ const descargarProductosError = () => ({
 })
 
 
+// SELECCIONA Y ELIMINA EL PRODUCTO
+
+export function borrarProductoAction(id){
+    return async (dispatch) => {
+        dispatch(obtenerProductoELiminar(id));
+        // Si se elimina, mostrar alerta
+        Swal.fire(
+            'Eliminado',
+            'El producto se eliminó correctamente',
+            'success'
+        );
+
+        try {
+            await clienteAxios.get(`/productos/${id}`);
+            dispatch(eliminarProductoExitoso());
+        } catch (error) {
+            console.log(error);
+            dispatch(eliminarProductoError());
+        }
+        
+    }
+}
+
+const obtenerProductoELiminar = id => ({
+    type:OBTENER_PRODUCTO_ELIMINAR,
+    payload:id
+});
+
+const eliminarProductoExitoso = () => ({
+    type:PRODUCTO_ELIMINAR_EXITOSO
+});
+
+const eliminarProductoError = () => ({
+    type:PRODUCTO_ELIMINAR_ERROR,
+    payload:true
+})
 
 
 
+
+// PARA RELLENAR EL FORMULARIO Y OBTENER EL PRODUCTO
+export function obtenerProductoEditar (producto){
+    return (dispatch) => {
+        dispatch(obtenerProductoEditarAction(producto))
+    }
+}
+
+const obtenerProductoEditarAction = producto => ({
+    type:OBTENER_PRODUCTO_EDITAR,
+    payload:producto
+});
+
+
+// EDITAR O PUT
+
+export function editarProductoAction(producto){
+    return async (dispatch) => {
+        dispatch(editarProducto());
+        try {
+            await clienteAxios.put(`/productos/${producto.id}`,producto)
+            dispatch(editarProductoExitoso(producto));
+            // console.log(respuesta); 
+        } catch (error) {
+            console.log(error);
+            dispatch(editarProductoError());
+        }
+    }
+}
+
+const editarProducto = () => ({
+    type:COMENZAR_EDICION_PRODUCTOS,
+});
+
+const editarProductoExitoso = producto => ({
+    type:PRODUCTO_EDITADO_EXITOSO,
+    payload:producto
+});
+
+const editarProductoError = () => ({
+    type:PRODUCTO_EDITADO_ERROR,
+    payload:true
+})
