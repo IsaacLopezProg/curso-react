@@ -31,7 +31,7 @@ const Logo = styled.p`
 
 const Headers = () => {
 
-    const usuario = true;
+    const usuario = false;
 
     return (
         <header
@@ -41,7 +41,12 @@ const Headers = () => {
         `}
             >
              <ContenedorHeader>
-                <div>
+                <div 
+                    css={css`
+                        display: flex;
+                        align-items: center;
+                    `}
+                >
                     <Link href="/">
                             <Logo>P</Logo>
                         </Link>
@@ -68,12 +73,12 @@ const Headers = () => {
                             </>
                         ) : (
                             <>
-                                <Link href="/">
+                                <Link href="/login">
                                     <Boton
                                         bgColor="true"
                                     >Login</Boton>
                                 </Link>
-                                <Link href="/">
+                                <Link href="/crear-cuenta">
                                     <Boton>Crear Cuenta</Boton>
                                 </Link>
                             </>
